@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<robot name="scara_robot">
+    <material name="blue">
+        <color rgba="0.0 0.0 1.0 1.0"/>
+    </material>
+    <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+    </material>
+    <material name="white">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+    </material>
+
+    <link name="world"/>
+
+    <link name="base_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="1.0 2.0 0.5"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="world"/>
+        <child link="base_link"/>
+    </joint>
+
+    <link name="vertical_link">
+        <visual>
+            <origin xyz="0.0 0.0 4" rpy="0.0 0.0 1.57079633"/>
+            <geometry>
+                <cylinder length="8" radius="0.3"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+    </link>
+
+    <joint name="rev_joint_1" type="revolute">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="vertical_link"/>
+        <axis xyz="0.0 0.0 1.0"/>
+        <limit lower="-1.57079633" upper="1.57079633" effort="1000.0" velocity="1000.0"/>
+    </joint>
+
+    <link name="arm_1">
+        <visual>
+            <origin xyz="0.0 0.0 1.0" rpy="0.0 0.0 0"/>
+            <geometry>
+                <box size="0.5 4.0 0.5"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <joint name="prismatic _joint" type="prismatic">
+        <origin xyz="0.0 -2 1.0" rpy="0.0 0.0 0.0"/>
+        <parent link="vertical_link"/>
+        <child link="arm_1"/>
+        <axis xyz="0.0 0.0 1.0"/>
+        <limit lower="0" upper="5.5" effort="1000.0" velocity="1000.0"/>
+    </joint>
+
+ <link name="arm_2">
+        <visual>
+            <origin xyz="0.0 -1.25 1" rpy="0.0 0.0 0"/>
+            <geometry>
+                <box size="0.5 3.0 0.5"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+    </link>
+
+
+    <joint name="rev_joint_2" type="revolute">
+        <origin xyz="0.0 -1.75 -0.5" rpy="0.0 0.0 0.0"/>
+        <parent link="arm_1"/>
+        <child link="arm_2"/>
+        <axis xyz="0.0 0.0 1.0"/>
+        <limit lower="-1.57079633" upper="1.57079633" effort="1000.0" velocity="1000.0"/>
+    </joint>
+
+    <link name="end_effector">
+        <visual>
+            <origin xyz="0.0 0.0 0" rpy="0.0 0.0 0"/>
+            <geometry>
+                <box size="0.3 0.3 1"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+  <joint name="rev_joint_3" type="revolute">
+        <origin xyz="0.0 -2.5 0.5" rpy="0.0 0.0 0.0"/>
+        <parent link="arm_2"/>
+        <child link="end_effector"/>
+        <axis xyz="0.0 0.0 1.0"/>
+        <limit lower="-1.57079633" upper="1.57079633" effort="1000.0" velocity="1000.0"/>
+    </joint>
+
+</robot>
