@@ -32,11 +32,18 @@ def move_object(objx,objy,objphi,packx,packy,packphi):
     # raise straight up
 
 def suction(state):
+    # GPIO numbers
+    vacuum = 0
+    solenoid = 0
+    
     GPIO.setup(vacuum, GPIO.OUT)
+    GPIO.setup(solenoid, GPIO.OUT)
     if state == 1:
-       
+       GPIO.output(vacuum, HIGH)
+       GPIO.output(solenoid, HIGH)
     elif state == 0:
-
+       GPIO.output(vacuum, LOW)
+       GPIO.output(solenoid, LOW)
 
 
 
