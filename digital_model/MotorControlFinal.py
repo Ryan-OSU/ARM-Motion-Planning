@@ -39,11 +39,11 @@ def suction(state):
     GPIO.setup(vacuum, GPIO.OUT)
     GPIO.setup(solenoid, GPIO.OUT)
     if state == 1:
-       GPIO.output(vacuum, HIGH)
-       GPIO.output(solenoid, HIGH)
+       GPIO.output(vacuum, GPIO.HIGH)
+       GPIO.output(solenoid, GPIO.HIGH)
     elif state == 0:
-       GPIO.output(vacuum, LOW)
-       GPIO.output(solenoid, LOW)
+       GPIO.output(vacuum, GPIO.LOW)
+       GPIO.output(solenoid, GPIO.LOW)
 
 
 
